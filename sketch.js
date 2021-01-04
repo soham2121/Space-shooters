@@ -54,7 +54,7 @@ function draw() {
     playbutton.destroy();
     spaceship.addImage(spaceshipimg2);
     moveStars(180, 1);
-    if(spaceship.y < 633){
+    if(spaceship.y < displayHeight-displayHeight/3){
       gamestate = "countdown";
       playSound(mySound);
     }
@@ -93,6 +93,7 @@ function draw() {
     spaceship.addImage(spaceshipimg3);
     moveStars(180, 2);
     countScore();
+    movePlayer();
   }
 }
 
@@ -127,8 +128,18 @@ function countScore(){
   fill("white");
   textSize(20);
   textFont('Hanalei Fill');
-  text("Score: " + Math.round(score), displayWidth - 120, spaceship.y-displayHeight/1.5);
+  text("Score: " + Math.round(score), displayWidth - 120, 100);
   if(frameCount % 7.5 === 0){
     score += 1;
+  }
+}
+
+function movePlayer(){
+  spaceship.x = mouseX;
+  if(spaceship.x > displayWidth - 50){
+    spaceship.x = displayWidth - 50;
+  }
+  if(spaceship.x < 50){
+    spaceship.x = 50;
   }
 }
